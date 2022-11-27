@@ -12,22 +12,87 @@ class BlocExample extends StatelessWidget {
       appBar: AppBar(
         title: const Text('Bloc Example'),
       ),
-      body: BlocBuilder<ExampleBloc, ExampleState>(
-        builder: (context, state) {
+      body: BlocListener<ExampleBloc, ExampleState>(
+        listener: (context, state) {
           if (state is ExampleStateData) {
-            return ListView.builder(
-              itemCount: state.names.length,
-              itemBuilder: (context, index) {
-                return ListTile(
-                  title: Text(state.names[index]),
-                );
-              },
+            ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  'A quantidade de nomes é: ${state.names.length}',
+                ),
+              ),
             );
           }
-          return const Center(
-            child: Text('Nenhum nome cadastrado'),
-          );
         },
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            BlocConsumer<ExampleBloc, ExampleState>(
+              builder: (context, state) {
+                if (state is ExampleStateData) {
+                  return Text('Total de nomes é: ${state.names.length}');
+                }
+                return const SizedBox.shrink();
+              },
+              listener: (context, state) {
+                print('Estado alterado para ${state.runtimeType}');
+              },
+            ),
+            BlocSelector<ExampleBloc, ExampleState, bool>(
+              selector: (state) {
+                if (state is ExampleStateInitial) {
+                  return true;
+                }
+                return false;
+              },
+              builder: (context, showLoader) {
+                if (showLoader) {
+                  return const Expanded(
+                    child: Center(
+                      child: CircularProgressIndicator(),
+                    ),
+                  );
+                }
+                return const SizedBox.shrink();
+              },
+            ),
+
+            BlocSelector<ExampleBloc, ExampleState, List<String>>(selector: (state) {
+              if(state is ExampleStateData){
+                return state.names;
+              }
+              return [];
+            }, builder: (context, names) {
+               return ListView.builder(
+                    shrinkWrap: true,
+                    itemCount: names.length,
+                    itemBuilder: (context, index) {
+                      return ListTile(
+                        title: Text(names[index]),
+                      );
+                    },
+                  );
+            },),
+            // BlocBuilder<ExampleBloc, ExampleState>(
+            //   builder: (context, state) {
+            //     if (state is ExampleStateData) {
+            //       return ListView.builder(
+            //         shrinkWrap: true,
+            //         itemCount: state.names.length,
+            //         itemBuilder: (context, index) {
+            //           return ListTile(
+            //             title: Text(state.names[index]),
+            //           );
+            //         },
+            //       );
+            //     }
+            //     return const Center(
+            //       child: Text('Nenhum nome cadastrado'),
+            //     );
+            //   },
+            // ),
+          ],
+        ),
       ),
     );
   }
