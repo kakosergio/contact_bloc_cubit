@@ -57,22 +57,30 @@ class BlocExample extends StatelessWidget {
               },
             ),
 
-            BlocSelector<ExampleBloc, ExampleState, List<String>>(selector: (state) {
-              if(state is ExampleStateData){
-                return state.names;
-              }
-              return [];
-            }, builder: (context, names) {
-               return ListView.builder(
-                    shrinkWrap: true,
-                    itemCount: names.length,
-                    itemBuilder: (context, index) {
-                      return ListTile(
-                        title: Text(names[index]),
-                      );
-                    },
-                  );
-            },),
+            BlocSelector<ExampleBloc, ExampleState, List<String>>(
+              selector: (state) {
+                if (state is ExampleStateData) {
+                  return state.names;
+                }
+                return [];
+              },
+              builder: (context, names) {
+                return ListView.builder(
+                  shrinkWrap: true,
+                  itemCount: names.length,
+                  itemBuilder: (context, index) {
+                    final name = names[index];
+                    return ListTile(
+                      onTap: () => context.read<ExampleBloc>()
+                        ..add(
+                          ExampleRemoveNameEvent(name: name),
+                        ),
+                      title: Text(names[index]),
+                    );
+                  },
+                );
+              },
+            ),
             // BlocBuilder<ExampleBloc, ExampleState>(
             //   builder: (context, state) {
             //     if (state is ExampleStateData) {
