@@ -6,9 +6,9 @@ abstract class ExampleState {}
 class ExampleStateInitial extends ExampleState {}
 
 class ExampleStateData extends ExampleState {
-  final List<String> name;
+  final List<String> names;
   
   ExampleStateData({
-    required this.name,
+    required this.names,
   });
 }
