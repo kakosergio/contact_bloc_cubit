@@ -15,12 +15,16 @@ class ExampleFreezedBloc
     on<_ExampleFreezedEventRemoveName>(_removeName);
   }
 
-  FutureOr<void> _addName(
-      _ExampleFreezedEventAddName event, Emitter<ExampleFreezedState> emit) {
+  Future<FutureOr<void>> _addName(
+      _ExampleFreezedEventAddName event, Emitter<ExampleFreezedState> emit) async {
+
     final names = state.maybeWhen(
       data: (names) => names,
       orElse: () => const <String>[],
     );
+    emit(ExampleFreezedState.showBanner(message: 'Nome adicionado', names: names));
+    await Future.delayed(const Duration(seconds: 2));
+
     final newNames = [...names];
     newNames.add(event.name);
     emit(ExampleFreezedState.data(names: newNames));
@@ -41,6 +45,7 @@ class ExampleFreezedBloc
     _ExampleFreezedEventFindNames event,
     Emitter<ExampleFreezedState> emit,
   ) async {
+    emit(ExampleFreezedState.loading());
     final names = [
       'Sérgio Kako',
       'Academia do Flutter',
