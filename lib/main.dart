@@ -2,9 +2,11 @@ import 'package:contact_bloc/features/bloc_example/bloc/example_bloc.dart';
 import 'package:contact_bloc/features/bloc_example/bloc_example.dart';
 import 'package:contact_bloc/features/bloc_example/bloc_freezed/example_freezed_bloc.dart';
 import 'package:contact_bloc/features/bloc_example/bloc_freezed_example.dart';
+import 'package:contact_bloc/repositories/contacts_repository.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import 'features/contacts/list/bloc/contact_list_bloc.dart';
 import 'features/contacts/list/contacts_list_page.dart';
 import 'home/home_page.dart';
 
@@ -17,24 +19,31 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Flutter Demo',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
+    return RepositoryProvider(
+      create: (context) => ContactsRepository(),
+      child: MaterialApp(
+        title: 'Flutter Demo',
+        theme: ThemeData(
+          primarySwatch: Colors.blue,
+        ),
+        initialRoute: '/home',
+        routes: {
+          '/home': (context) => const HomePage(),
+          '/bloc/example/': (_) => BlocProvider(
+                create: (_) => ExampleBloc()..add(ExampleFindNameEvent()),
+                child: BlocExample(),
+              ),
+          '/bloc/example/freezed': (_) => BlocProvider<ExampleFreezedBloc>(
+              create: (BuildContext context) => ExampleFreezedBloc()
+                ..add(const ExampleFreezedEvent.findNames()),
+              child: const BlocFreezedExample()),
+          '/contacts/list': (context) => BlocProvider(
+                create: (context) => ContactListBloc(
+                    repository: context.read<ContactsRepository>()),
+                child: const ContactsListPage(),
+              ),
+        },
       ),
-      initialRoute: '/home',
-      routes: {
-        '/home': (context) => const HomePage(),
-        '/bloc/example/': (_) => BlocProvider(
-              create: (_) => ExampleBloc()..add(ExampleFindNameEvent()),
-              child: BlocExample(),
-            ),
-        '/bloc/example/freezed': (_) => BlocProvider<ExampleFreezedBloc>(
-            create: (BuildContext context) => ExampleFreezedBloc()
-              ..add(const ExampleFreezedEvent.findNames()),
-            child: const BlocFreezedExample()),
-        '/contacts/list': (context) => const ContactsListPage(),
-      },
     );
   }
 }
