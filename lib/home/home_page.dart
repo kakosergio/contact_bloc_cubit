@@ -18,8 +18,8 @@ class HomePage extends StatelessWidget {
             children: [
               ButtonCard(label: 'Bloc Example', onTap: () => Navigator.of(context).pushNamed('/bloc/example/')),
               ButtonCard(label: 'Bloc Freezed', onTap: () => Navigator.of(context).pushNamed('/bloc/example/freezed')),
-              ButtonCard(label: 'Contacts Example', onTap: () => Navigator.of(context).pushNamed('/bloc/contacts/')),
-              ButtonCard(label: 'Sei lá Example', onTap: () => Navigator.of(context).pushNamed('/bloc/example/')),
+              ButtonCard(label: 'Contacts Example', onTap: () => Navigator.of(context).pushNamed('/contacts/list')),
+              ButtonCard(label: 'Cubit Contacts', onTap: () => Navigator.of(context).pushNamed('/cubit/contacts/')),
             ],
           ),
         ),

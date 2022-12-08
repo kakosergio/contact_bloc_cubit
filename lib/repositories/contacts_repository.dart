@@ -3,7 +3,7 @@ import 'package:dio/dio.dart';
 
 class ContactsRepository {
   Future<List<ContactModel>> findAll() async {
-    final response = await Dio().get('http://10.0.2.2:3031/contacts');
+    final response = await Dio().get('http://192.168.0.176:3031/contacts');
 
     return response.data
         ?.map<ContactModel>((contact) => ContactModel.fromMap(contact))

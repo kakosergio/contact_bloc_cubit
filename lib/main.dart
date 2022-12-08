@@ -39,7 +39,8 @@ class MyApp extends StatelessWidget {
               child: const BlocFreezedExample()),
           '/contacts/list': (context) => BlocProvider(
                 create: (context) => ContactListBloc(
-                    repository: context.read<ContactsRepository>()),
+                    repository: context.read<ContactsRepository>())
+                  ..add(const ContactListEvent.findAll()),
                 child: const ContactsListPage(),
               ),
         },
