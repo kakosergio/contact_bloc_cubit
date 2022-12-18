@@ -12,7 +12,10 @@ class ContactsListPage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
-        onPressed: () => Navigator.of(context).pushNamed('/contacts/register'),
+        onPressed: () async {
+          await Navigator.pushNamed(context, '/contacts/register');
+          context.read<ContactListBloc>().add(const ContactListEvent.findAll());
+        },
         child: const Icon(Icons.add),
       ),
       appBar: AppBar(

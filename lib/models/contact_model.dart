@@ -1,12 +1,12 @@
 import 'dart:convert';
 
 class ContactModel {
-  final String id;
+  final String? id;
   final String name;
   final String email;
   
   ContactModel({
-    required this.id,
+    this.id,
     required this.name,
     required this.email,
   });
