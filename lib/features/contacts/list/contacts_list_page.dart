@@ -2,7 +2,6 @@ import 'package:contact_bloc/features/contacts/list/bloc/contact_list_bloc.dart'
 import 'package:contact_bloc/widgets/loader.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-
 import '../../../models/contact_model.dart';
 
 class ContactsListPage extends StatelessWidget {
@@ -72,7 +71,7 @@ class ContactsListPage extends StatelessWidget {
                             final contact = contacts[index];
                             return ListTile(
                               onTap: () => Navigator.of(context)
-                                  .pushNamed('/contacts/update'),
+                                  .pushNamed('/contacts/update', arguments: contact),
                               title: Text(contact.name),
                               subtitle: Text(contact.email),
                             );
