@@ -1,16 +1,12 @@
-# contact_bloc
+# :notebook: Contact List with Bloc/Cubit
 
-A new Flutter project.
+Projeto que tem como objetivo aprofundar o conhecimento em BloC e Cubit
 
-## Getting Started
+## :computer: Tecnologias utilizadas
 
-This project is a starting point for a Flutter application.
+- BloC e Cubit como gerenciadores de estado;
+- Dartion como web server para estudos;
+- Pacote http para comunicação com o Dartion.
 
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## :man_scientist: Contributors
+- Sérgio R. R. Teixeira (@kakosergio)
