@@ -1,8 +1,18 @@
 name: Test
 port: 3031
 host: 0.0.0.0
-db: db.json
-statics: public/
+database: database.json
+
+auth:
+   urlSkip:
+      - /contacts:
+         method: post
+      - /contacts:
+         method: get
+      - /contacts/{*}:
+         method: put
+      - /contacts:
+         method: delete
 
 # storage:
 #   folder: storage/

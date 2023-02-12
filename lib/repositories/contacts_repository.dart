@@ -11,11 +11,11 @@ class ContactsRepository {
   }
 
   Future<void> create(ContactModel model) async =>
-      Dio().post('http://10.0.2.2:3031/contacts', data: model.toMap());
+      Dio().post('http://192.168.0.175:3031/contacts', data: model.toMap());
 
   Future<void> update(ContactModel model) async => Dio()
-      .put('http://10.0.2.2:3031/contacts/${model.id}', data: model.toMap());
+      .put('http://192.168.0.175/contacts/${model.id}', data: model.toMap());
 
   Future<void> delete(ContactModel model) async => Dio()
-      .delete('http://10.0.2.2:3031/contacts/${model.id}');
+      .delete('http://192.168.0.175:3031/contacts/${model.id}');
 }

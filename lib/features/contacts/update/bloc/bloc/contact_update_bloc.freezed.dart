@@ -16,22 +16,22 @@ final _privateConstructorUsedError = UnsupportedError(
 
 /// @nodoc
 mixin _$ContactUpdateEvent {
-  String get id => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
   String get name => throw _privateConstructorUsedError;
   String get email => throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String id, String name, String email) save,
+    required TResult Function(int id, String name, String email) save,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String id, String name, String email)? save,
+    TResult? Function(int id, String name, String email)? save,
   }) =>
       throw _privateConstructorUsedError;
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String id, String name, String email)? save,
+    TResult Function(int id, String name, String email)? save,
     required TResult orElse(),
   }) =>
       throw _privateConstructorUsedError;
@@ -63,7 +63,7 @@ abstract class $ContactUpdateEventCopyWith<$Res> {
           ContactUpdateEvent value, $Res Function(ContactUpdateEvent) then) =
       _$ContactUpdateEventCopyWithImpl<$Res, ContactUpdateEvent>;
   @useResult
-  $Res call({String id, String name, String email});
+  $Res call({int id, String name, String email});
 }
 
 /// @nodoc
@@ -87,7 +87,7 @@ class _$ContactUpdateEventCopyWithImpl<$Res, $Val extends ContactUpdateEvent>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -107,7 +107,7 @@ abstract class _$$_SaveCopyWith<$Res>
       __$$_SaveCopyWithImpl<$Res>;
   @override
   @useResult
-  $Res call({String id, String name, String email});
+  $Res call({int id, String name, String email});
 }
 
 /// @nodoc
@@ -128,7 +128,7 @@ class __$$_SaveCopyWithImpl<$Res>
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as String,
+              as int,
       name: null == name
           ? _value.name
           : name // ignore: cast_nullable_to_non_nullable
@@ -147,7 +147,7 @@ class _$_Save implements _Save {
   const _$_Save({required this.id, required this.name, required this.email});
 
   @override
-  final String id;
+  final int id;
   @override
   final String name;
   @override
@@ -180,7 +180,7 @@ class _$_Save implements _Save {
   @override
   @optionalTypeArgs
   TResult when<TResult extends Object?>({
-    required TResult Function(String id, String name, String email) save,
+    required TResult Function(int id, String name, String email) save,
   }) {
     return save(id, name, email);
   }
@@ -188,7 +188,7 @@ class _$_Save implements _Save {
   @override
   @optionalTypeArgs
   TResult? whenOrNull<TResult extends Object?>({
-    TResult? Function(String id, String name, String email)? save,
+    TResult? Function(int id, String name, String email)? save,
   }) {
     return save?.call(id, name, email);
   }
@@ -196,7 +196,7 @@ class _$_Save implements _Save {
   @override
   @optionalTypeArgs
   TResult maybeWhen<TResult extends Object?>({
-    TResult Function(String id, String name, String email)? save,
+    TResult Function(int id, String name, String email)? save,
     required TResult orElse(),
   }) {
     if (save != null) {
@@ -236,12 +236,12 @@ class _$_Save implements _Save {
 
 abstract class _Save implements ContactUpdateEvent {
   const factory _Save(
-      {required final String id,
+      {required final int id,
       required final String name,
       required final String email}) = _$_Save;
 
   @override
-  String get id;
+  int get id;
   @override
   String get name;
   @override

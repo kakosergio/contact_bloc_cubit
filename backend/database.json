@@ -1,1 +1,14 @@
-{}
+{
+    "contacts": [
+        {
+            "id": 1,
+            "name": "Sérgio Ricardo Teixeira",
+            "email": "sergioricardort@hotmail.com"
+        },
+        {
+            "id": 2,
+            "name": "oi",
+            "email": "teste"
+        }
+    ]
+}
