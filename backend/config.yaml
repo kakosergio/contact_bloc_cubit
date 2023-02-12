@@ -2,25 +2,3 @@ name: Test
 port: 3031
 host: 0.0.0.0
 database: database.json
-
-auth:
-   urlSkip:
-      - /contacts:
-         method: post
-      - /contacts:
-         method: get
-      - /contacts/{*}:
-         method: put
-      - /contacts:
-         method: delete
-
-# storage:
-#   folder: storage/
-#   name: "file"
-
-# auth:
-#   key: dajdi3cdj8jw40jv89cj4uybfg9wh9vcnvb
-#   exp: 3600
-#   scape:
-#     - storage
-#     - file

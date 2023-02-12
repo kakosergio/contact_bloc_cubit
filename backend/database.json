@@ -1,14 +1,1 @@
-{
-    "contacts": [
-        {
-            "id": 1,
-            "name": "Sérgio Ricardo Teixeira",
-            "email": "sergioricardort@hotmail.com"
-        },
-        {
-            "id": 2,
-            "name": "oi",
-            "email": "teste"
-        }
-    ]
-}
+{"contacts":[{"id":1,"name":"Sérgio Ricardo Teixeira","email":"sergioricardort@hotmail.com"},{"id":2,"name":"oi","email":"oi@oi"},{"id":3,"name":"teste","email":"teste@teste"}]}

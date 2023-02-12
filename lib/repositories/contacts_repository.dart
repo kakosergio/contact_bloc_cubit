@@ -14,7 +14,7 @@ class ContactsRepository {
       Dio().post('http://192.168.0.175:3031/contacts', data: model.toMap());
 
   Future<void> update(ContactModel model) async => Dio()
-      .put('http://192.168.0.175/contacts/${model.id}', data: model.toMap());
+      .put('http://192.168.0.175:3031/contacts/${model.id}', data: model.toMap());
 
   Future<void> delete(ContactModel model) async => Dio()
       .delete('http://192.168.0.175:3031/contacts/${model.id}');
