@@ -43,51 +43,68 @@ class _ContactUpdatePageState extends State<ContactUpdatePage> {
       appBar: AppBar(
         title: const Text('Contact Update Page'),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: [
-              TextFormField(
-                controller: _nameEC,
-                decoration: const InputDecoration(
-                  label: Text('Nome'),
+      body: BlocListener<ContactUpdateBloc, ContactUpdateState>(
+        listener: (context, state) {
+          state.whenOrNull(
+            success: Navigator.of(context).pop,
+            error: (message) => ScaffoldMessenger.of(context).showSnackBar(
+              SnackBar(
+                content: Text(
+                  message,
+                  style: const TextStyle(color: Colors.white),
                 ),
-                validator: (String? value) => value == null || value.isEmpty
-                    ? 'Nome é obrigatório'
-                    : null,
+                backgroundColor: Colors.red,
               ),
-              TextFormField(
-                controller: _emailEC,
-                decoration: const InputDecoration(
-                  label: Text('Nome'),
+            ),
+          );
+        },
+        child: Padding(
+          padding: const EdgeInsets.all(8.0),
+          child: Form(
+            key: _formKey,
+            child: Column(
+              children: [
+                TextFormField(
+                  controller: _nameEC,
+                  decoration: const InputDecoration(
+                    label: Text('Nome'),
+                  ),
+                  validator: (String? value) => value == null || value.isEmpty
+                      ? 'Nome é obrigatório'
+                      : null,
                 ),
-                validator: (String? value) => value == null || value.isEmpty
-                    ? 'E-mail é obrigatório'
-                    : null,
-              ),
-              ElevatedButton(
-                onPressed: () {
-                  final validator = _formKey.currentState?.validate() ?? false;
-                  if (validator) {
-                    context.read<ContactUpdateBloc>().add(
-                          ContactUpdateEvent.save(
-                              id: widget.contact.id!,
-                              name: _nameEC.text,
-                              email: _emailEC.text),
-                        );
-                  }
-                },
-                child: const Text('Salvar'),
-              ),
-              Loader<ContactUpdateBloc, ContactUpdateState>(
-                selector: (state) => state.maybeWhen(
-                  loading: () => true,
-                  orElse: () => false,
+                TextFormField(
+                  controller: _emailEC,
+                  decoration: const InputDecoration(
+                    label: Text('Nome'),
+                  ),
+                  validator: (String? value) => value == null || value.isEmpty
+                      ? 'E-mail é obrigatório'
+                      : null,
                 ),
-              )
-            ],
+                ElevatedButton(
+                  onPressed: () {
+                    final validator =
+                        _formKey.currentState?.validate() ?? false;
+                    if (validator) {
+                      context.read<ContactUpdateBloc>().add(
+                            ContactUpdateEvent.save(
+                                id: widget.contact.id!,
+                                name: _nameEC.text,
+                                email: _emailEC.text),
+                          );
+                    }
+                  },
+                  child: const Text('Salvar'),
+                ),
+                Loader<ContactUpdateBloc, ContactUpdateState>(
+                  selector: (state) => state.maybeWhen(
+                    loading: () => true,
+                    orElse: () => false,
+                  ),
+                )
+              ],
+            ),
           ),
         ),
       ),

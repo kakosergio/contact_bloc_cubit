@@ -12,9 +12,9 @@ class ContactsListPage extends StatelessWidget {
     return Scaffold(
       floatingActionButton: FloatingActionButton(
         onPressed: () async {
+          final read = context.read<ContactListBloc>();
           await Navigator.pushNamed(context, '/contacts/register');
-          // ignore: use_build_context_synchronously
-          context.read<ContactListBloc>().add(const ContactListEvent.findAll());
+          read.add(const ContactListEvent.findAll());
         },
         child: const Icon(Icons.add),
       ),
@@ -70,8 +70,13 @@ class ContactsListPage extends StatelessWidget {
                           itemBuilder: (context, index) {
                             final contact = contacts[index];
                             return ListTile(
-                              onTap: () => Navigator.of(context)
-                                  .pushNamed('/contacts/update', arguments: contact),
+                              onTap: () async {
+                                final read = context.read<ContactListBloc>();
+                                await Navigator.of(context).pushNamed(
+                                    '/contacts/update',
+                                    arguments: contact);
+                                read.add(const ContactListEvent.findAll());
+                              },
                               title: Text(contact.name),
                               subtitle: Text(contact.email),
                             );
