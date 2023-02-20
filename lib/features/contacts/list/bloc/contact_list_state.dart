@@ -8,4 +8,5 @@ class ContactListState with _$ContactListState {
       _ContactListStateData;
   factory ContactListState.error({required String error}) =
       _ContactListStateError;
+  factory ContactListState.success() = _ContactListStateSuccess;
 }

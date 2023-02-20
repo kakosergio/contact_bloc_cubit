@@ -28,20 +28,34 @@ class ContactsListPage extends StatelessWidget {
         // para que não seja rebuildado
         listenWhen: (previous, current) => current.maybeWhen(
           error: (error) => true,
+          success: () => true,
           orElse: () => false,
         ),
         listener: (context, state) {
           state.whenOrNull(
-            error: (error) => ScaffoldMessenger.of(context).showSnackBar(
-              SnackBar(
-                content: Text(
-                  error,
-                  style: const TextStyle(color: Colors.white),
-                ),
-                backgroundColor: Colors.red,
-              ),
-            ),
-          );
+              error: (error) => ScaffoldMessenger.of(context).showSnackBar(
+                    SnackBar(
+                      content: Text(
+                        error,
+                        style: const TextStyle(color: Colors.white),
+                      ),
+                      backgroundColor: Colors.red,
+                    ),
+                  ),
+              success: () {
+                context.read<ContactListBloc>().add(const ContactListEvent.findAll());
+                ScaffoldMessenger.of(context).showSnackBar(
+                  const SnackBar(
+                    content: Text(
+                      'Contato excluído com sucesso',
+                      style: TextStyle(
+                        color: Colors.white,
+                      ),
+                    ),
+                    backgroundColor: Colors.green,
+                  ),
+                );
+              });
         },
         child: RefreshIndicator(
           onRefresh: () async => context.read<ContactListBloc>()
@@ -70,6 +84,12 @@ class ContactsListPage extends StatelessWidget {
                           itemBuilder: (context, index) {
                             final contact = contacts[index];
                             return ListTile(
+                              onLongPress: () {
+                                final read = context.read<ContactListBloc>();
+                                read.add(
+                                  ContactListEvent.delete(model: contact),
+                                );
+                              },
                               onTap: () async {
                                 final read = context.read<ContactListBloc>();
                                 await Navigator.of(context).pushNamed(

@@ -1,12 +1,8 @@
 import 'dart:developer';
-
 import 'package:bloc/bloc.dart';
-import 'package:contact_bloc/features/contacts/list/bloc/contact_list_bloc.dart';
 import 'package:contact_bloc/repositories/contacts_repository.dart';
 import 'package:freezed_annotation/freezed_annotation.dart';
-
 import '../../../../models/contact_model.dart';
-
 part 'contacts_list_cubit_state.dart';
 part 'contacts_list_cubit.freezed.dart';
 

@@ -17,6 +17,7 @@ class ContactListBloc extends Bloc<ContactListEvent, ContactListState> {
       : _repository = repository,
         super(ContactListState.initial()) {
     on<_ContactListEventFindAll>(_findAll);
+    on<_ContactListEventDelete>(_delete);
   }
 
   Future<void> _findAll(_ContactListEventFindAll event, Emitter emit) async {
@@ -30,6 +31,22 @@ class ContactListBloc extends Bloc<ContactListEvent, ContactListState> {
     } catch (e, s) {
       log('Erro ao buscar contatos', error: e, stackTrace: s);
       emit(ContactListState.error(error: 'Erro ao buscar contatos'));
+    }
+  }
+
+  Future<void> _delete(_ContactListEventDelete event, Emitter emit) async {
+    try {
+      //emite um estado de carregando
+      emit(ContactListState.loading());
+      //guarda o modelo que quer excluir
+      final contact = event.model;
+      //deleta do backend
+      await _repository.delete(contact);
+      //emite o estado dizendo que deu certo
+      emit(ContactListState.success());
+    } catch (e, s) {
+      log('Erro ao excluir o contato', error: e, stackTrace: s);
+      emit(ContactListState.error(error: 'Erro ao excluir o contato'));
     }
   }
 }

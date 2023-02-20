@@ -65,7 +65,7 @@ class _ContactRegisterPageState extends State<ContactRegisterPage> {
                 TextFormField(
                   controller: _emailEC,
                   decoration: const InputDecoration(
-                    label: Text('Nome'),
+                    label: Text('E-mail'),
                   ),
                   validator: (String? value) => value == null || value.isEmpty
                       ? 'E-mail é obrigatório'
