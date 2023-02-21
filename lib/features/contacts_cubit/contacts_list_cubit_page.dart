@@ -52,7 +52,13 @@ class ContactsListCubitPage extends StatelessWidget {
                         itemBuilder: (_, index) {
                           final contact = contacts[index];
                           return ListTile(
-                            // onTap: () async => await Navigator.of(context).pushNamed('/contacts/cubit/register'),
+                            onTap: () async {
+                              final read = context.read<ContactsListCubit>();
+                              await Navigator.of(context).pushNamed(
+                                  '/contacts/cubit/update',
+                                  arguments: contact);
+                              read.findAll();
+                            },
                             onLongPress: () => context
                                 .read<ContactsListCubit>()
                                 .deleteByModel(contact),
